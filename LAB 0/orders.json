@@ -1,0 +1,31 @@
+[
+    {
+        "order_id": 1,
+        "customer_name": "Alice",
+        "items": [
+            [
+                "Laptop",
+                1,
+                1200.0
+            ],
+            [
+                "Mouse",
+                2,
+                25.0
+            ]
+        ],
+        "total": 1250.0
+    },
+    {
+        "order_id": 2,
+        "customer_name": "Bob",
+        "items": [
+            [
+                "Phone",
+                1,
+                800.0
+            ]
+        ],
+        "total": 800.0
+    }
+]
