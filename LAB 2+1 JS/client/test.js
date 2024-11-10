@@ -1,31 +1,23 @@
-// main.js
-const { OrangeSytems, Endava, Pentalog, Payment } = require('../strategy_pattern/payment');
+const { CustomerSupport } = require("../domain/Creational/Classes_Builder/customer_support");
+const { Developer } = require("../domain/Creational/Classes_Builder/developer");
+const { Tester } = require("../domain/Creational/Classes_Builder/tester");
+const SalaryBonusDecorator = require('../domain/Strcutural/Decorator');
+const ProjectCost = require('../domain/Strcutural/Facade');
 
-// Create instances of companies
-const orangeSytems = new OrangeSytems();
-const endava = new Endava();
-const pentalog = new Pentalog();
 
-// Create an instance of the Payment class
-const paymentCalculator = new Payment();
+const employees = [
+    new CustomerSupport(1, "Patrick", 30, 8, "OrangeSystems"),
+    new Developer(2, "John", 23, 2, "Endava"),
+    new Tester(3, "Max", 38, 12, "Pentalog"),
+];
 
-// Create an example Employee object
-const employee = {
-    experience: 7,   // Experience in years
-    type: 1          // Type 1 represents Developer
-};
+employees.forEach((employee) => {
+    const decoratedEmployee = new SalaryBonusDecorator(employee);
+    const totalSalary = decoratedEmployee.getSalary();
+});
 
-// Set company strategy and calculate payment for OrangeSytems
-paymentCalculator.setStrategy(orangeSytems);
-const orangePayment = paymentCalculator.calculator(employee);
-console.log('OrangeSytems Payment:', orangePayment);
-
-// Set company strategy and calculate payment for Endava
-paymentCalculator.setStrategy(endava);
-const endavaPayment = paymentCalculator.calculator(employee);
-console.log('Endava Payment:', endavaPayment);
-
-// Set company strategy and calculate payment for Pentalog
-paymentCalculator.setStrategy(pentalog);
-const pentalogPayment = paymentCalculator.calculator(employee);
-console.log('Pentalog Payment:', pentalogPayment);
+const projectCost = new ProjectCost();
+const number_of_employees = employees.length;
+const days = 10; 
+const totalCost = projectCost.calc(0, number_of_employees, days);
+console.log("Total Project Cost:", totalCost);
