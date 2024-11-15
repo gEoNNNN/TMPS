@@ -2,76 +2,71 @@ const { OrangeSytems, Endava, Pentalog, Payment } = require("../strategy_pattern
 const EmployeeFactory = require("../factory_pattern/employee_factory");
 const BonusDecorator = require('../decorator_pattern/bonusDecorator');
 const { AcmeCorp, AcmeCorpAdapter } = require('../adapter_pattern/acmeCorpAdapter');
-//Print method
-function say(employee) {
-    console.log("ID: " + this.id);
-    console.log("Name: " + this.name);
-    console.log("Position: " + this.type);
-    console.log("Age: " + this.age + " years");
-    console.log("Experience: " + this.experience);
-    console.log("Company: " + this.company);
-    console.log("Slary: " + this.pay);
-}
-//Factory
+const { Department } = require('../composite_pattern/companyStructure');
+
 const employeeFactory = new EmployeeFactory();
-const employee = [];
-employee.push(employeeFactory.create(employee.length, "Patrick", 1, 30, 8, "OrangeSytems"));
-employee.push(employeeFactory.create(employee.length, "John", 2, 23, 2, "Endava"));
-employee.push(employeeFactory.create(employee.length, "Max", 3, 38, 12, "Pentalog"));
-employee.push(employeeFactory.create(employee.length, "jan", 3, 38, 12, "AcmeCorp"));
-//Strategy
+const department = new Department("IT Department");
+
+const employees = [
+    employeeFactory.create(1, "Patrick", 1, 30, 8, "OrangeSytems"),
+    employeeFactory.create(2, "John", 2, 23, 2, "Endava"),
+    employeeFactory.create(3, "Max", 3, 38, 12, "Pentalog"),
+    employeeFactory.create(4, "Jan", 3, 45, 15, "AcmeCorp")
+];
+
 const orangesytems = new OrangeSytems();
 const endava = new Endava();
 const pentalog = new Pentalog();
 const paymentCalculator = new Payment();
-//pay 
-employee.forEach(emp => {
-    const acmePay = 0
-    //say.call(emp, emp);
+
+employees.forEach(emp => {
     let statsType;
 
     if (emp.type === "CustomerSupport") {
         statsType = 3;
-    }
-    if (emp.type === "Tester") {
+    } else if (emp.type === "Tester") {
         statsType = 2;
-    }
-    if (emp.type === "Developer") {
+    } else if (emp.type === "Developer") {
         statsType = 1;
+    } else {
+        console.error(`Unknown employee type for employee ${emp.name}: ${emp.type}`);
+        return;
     }
 
     const stats = {
         experience: emp.experience,
         type: statsType
     };
-    paymentCalculator.setStrategy(orangesytems);
+
+    console.log(`Calculating salary for ${emp.name} with stats:`, stats);
+
     if (emp.company === "OrangeSytems") {
         paymentCalculator.setStrategy(orangesytems);
-    }
-    if (emp.company === "Endava") {
+    } else if (emp.company === "Endava") {
         paymentCalculator.setStrategy(endava);
-    }
-    if (emp.company === "Pentalog") {
+    } else if (emp.company === "Pentalog") {
         paymentCalculator.setStrategy(pentalog);
-    //Adaptor
-    }if (emp.company === "AcmeCorp") {
+    } else if (emp.company === "AcmeCorp") {
         const acmeCorp = new AcmeCorp();
         const acmeCorpAdapter = new AcmeCorpAdapter(acmeCorp);
         paymentCalculator.setStrategy(acmeCorpAdapter);
-        const acmePay = paymentCalculator.calculator(stats);
-        //console.log('AcmeCorp Salary:', acmePay);
+    } else {
+        console.error(`Unknown company for employee ${emp.name}: ${emp.company}`);
+        return;
     }
-    const pay = paymentCalculator.calculator(stats);
-    if (acmePay != 0){
-        emp.pay = acmePay 
-    }else {
-        emp.pay = pay
+
+    const calculatedSalary = paymentCalculator.calculator(stats);
+    if (isNaN(calculatedSalary)) {
+        console.error(`Calculated salary is NaN for ${emp.name} with stats:`, stats);
     }
-});
-//Decorator Pattern:
-employee.forEach(emp => {
-    say.call(emp,emp)
+    emp.salary = calculatedSalary || 0;
+
     const bonusDecorator = new BonusDecorator(emp);
-    salary = bonusDecorator.calculateSalary();
-    console.log('Salary (with bonus if it has more than 10y of experience):', salary);
+    emp.salary = bonusDecorator.calculateSalary();
+    console.log(`Final salary for ${emp.name}: ${emp.salary}`);
 });
+
+employees.forEach(emp => department.add(emp));
+
+department.displayInfo();
+console.log("Total Department Salary:", department.getSalary());

@@ -1,4 +1,3 @@
-// CustomerSupport class
 class CustomerSupport {
     constructor(id, name, age, experience, company) {
         this.id = id;

@@ -1,5 +1,3 @@
-// payment.js
-
 function OrangeSytems() {
     this.calculator = (Employee) => {
         let Payment;
@@ -12,13 +10,13 @@ function OrangeSytems() {
         }
         switch (Employee.type) {
             case 1:
-                return Payment * 1.7; // Developer
+                return Payment * 1.7;
             case 2:
-                return Payment * 1.4; // Tester
+                return Payment * 1.4;
             case 3:
-                return Payment * 1.2; // Other roles
+                return Payment * 1.2;
             default:
-                return 0; // Default case to handle unknown type
+                return 0;
         }
     };
 }
@@ -35,13 +33,13 @@ function Endava() {
         }
         switch (Employee.type) {
             case 1:
-                return Payment * 1.7; // Developer
+                return Payment * 1.7; 
             case 2:
-                return Payment * 1.4; // Tester
+                return Payment * 1.4;
             case 3:
-                return Payment * 1.2; // Other roles
+                return Payment * 1.2;
             default:
-                return 0; // Default case to handle unknown type
+                return 0;
         }
     };
 }
@@ -58,13 +56,13 @@ function Pentalog() {
         }
         switch (Employee.type) {
             case 1:
-                return Payment * 1.7; // Developer
+                return Payment * 1.7;
             case 2:
-                return Payment * 1.4; // Tester
+                return Payment * 1.4;
             case 3:
-                return Payment * 1.2; // Other roles
+                return Payment * 1.2;
             default:
-                return 0; // Default case to handle unknown type
+                return 0;
         }
     };
 }

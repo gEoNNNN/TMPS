@@ -1,6 +1,4 @@
-// adapterPattern/acmeCorpAdapter.js
 class AcmeCorp {
-    // Assume AcmeCorp uses a different calculation method
     calculator(employee) {
         let payment;
         if (employee.experience < 5) {
@@ -12,11 +10,11 @@ class AcmeCorp {
         }
         switch (employee.type) {
             case 1:
-                return payment * 1.5; // Developer
+                return payment * 1.5;
             case 2:
-                return payment * 1.3; // Tester
+                return payment * 1.3;
             case 3:
-                return payment * 1.1; // Customer Support
+                return payment * 1.1;
             default:
                 return 0;
         }

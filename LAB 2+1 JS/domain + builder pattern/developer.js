@@ -1,4 +1,3 @@
-// domain/developer.js
 class Developer {
     constructor(id, name, age, experience, company) {
         this.id = id;
