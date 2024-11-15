@@ -1,4 +1,5 @@
 // payment.js
+
 function OrangeSytems() {
     this.calculator = (Employee) => {
         let Payment;
