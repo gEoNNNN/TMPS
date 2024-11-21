@@ -6,7 +6,7 @@ class Employee {
         this.age = age;
         this.experience = experience;
         this.company = company;
-        this.salary = salary;
+        this.salary = salary;  // Salary is assigned here directly
     }
 
     getSalary() {
@@ -18,6 +18,7 @@ class Employee {
     }
 }
 
+
 class Department {
     constructor(name) {
         this.name = name;
@@ -25,6 +26,10 @@ class Department {
     }
 
     add(member) {
+        if (typeof member.getSalary !== "function") {
+            console.error(`Cannot add member to ${this.name}: Invalid member without getSalary method.`);
+            return;
+        }
         this.members.push(member);
     }
 
@@ -33,19 +38,19 @@ class Department {
     }
 
     getSalary() {
-        return this.members.reduce((total, member) => total + member.getSalary(), 0);
+        return this.members.reduce((total, member) => {
+            if (typeof member.getSalary !== "function") {
+                console.error(`Invalid member in ${this.name}:`, member);
+                return total; // Skip invalid members
+            }
+            return total + member.getSalary();
+        }, 0);
     }
 
     displayInfo(indent = 0) {
         console.log(`${' '.repeat(indent)}Department: ${this.name}`);
-        this.members.forEach(member => {
-            if (typeof member.displayInfo === 'function') {
-                member.displayInfo(indent + 2);
-            } else {
-                console.error(`Member with ID ${member.id} does not have a displayInfo method.`);
-            }
-        });
+        this.members.forEach(member => member.displayInfo(indent + 2));
     }
 }
 
-module.exports = { Employee, Department };
+module.exports = { Department,Employee };

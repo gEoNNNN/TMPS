@@ -4,7 +4,7 @@ class BonusDecorator {
     }
 
     calculateSalary() {
-        let baseSalary = this.employee.pay;
+        let baseSalary = this.employee.salary;
         if (this.employee.experience > 10) {
             baseSalary += 500;
         }

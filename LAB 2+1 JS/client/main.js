@@ -1,8 +1,8 @@
 const { OrangeSytems, Endava, Pentalog, Payment } = require("../strategy_pattern/payment");
 const EmployeeFactory = require("../factory_pattern/employee_factory");
-const BonusDecorator = require('../decorator_pattern/bonusDecorator');
-const { AcmeCorp, AcmeCorpAdapter } = require('../adapter_pattern/acmeCorpAdapter');
-const { Department } = require('../composite_pattern/companyStructure');
+const BonusDecorator = require("../decorator_pattern/bonusDecorator");
+const { AcmeCorp, AcmeCorpAdapter } = require("../adapter_pattern/acmeCorpAdapter");
+const { Department } = require("../composite_pattern/companyStructure");
 
 const employeeFactory = new EmployeeFactory();
 const department = new Department("IT Department");
@@ -67,6 +67,17 @@ employees.forEach(emp => {
 });
 
 employees.forEach(emp => department.add(emp));
+
+const displayAllEmployees = () => {
+    console.log("Employee Details:");
+    console.log("--------------------------------------------------------------------------------------------")
+    employees.forEach(emp => {
+        console.log(`Name: ${emp.name}, ID: ${emp.id}, Type: ${emp.type}, Age: ${emp.age}, Experience: ${emp.experience}, Company: ${emp.company}, Salary: ${emp.salary}`);
+        console.log("--------------------------------------------------------------------------------------------")
+    });
+};
+
+displayAllEmployees(); 
 
 department.displayInfo();
 console.log("Total Department Salary:", department.getSalary());
