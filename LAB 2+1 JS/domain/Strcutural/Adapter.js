@@ -2,7 +2,6 @@ const { CustomerSupport } = require("../Creational/Classes_Builder/customer_supp
 const { Developer } = require("../Creational/Classes_Builder/developer");
 const { Tester } = require("../Creational/Classes_Builder/tester");
 
-
 class SalaryAdapter {
     constructor(employee) {
         this.employee = employee;

@@ -4,7 +4,6 @@ const { Tester } = require("../domain/Creational/Classes_Builder/tester");
 const SalaryBonusDecorator = require('../domain/Strcutural/Decorator');
 const ProjectCost = require('../domain/Strcutural/Facade');
 
-
 const employees = [
     new CustomerSupport(1, "Patrick", 30, 8, "OrangeSystems"),
     new Developer(2, "John", 23, 2, "Endava"),
